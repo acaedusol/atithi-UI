@@ -21,10 +21,58 @@ export class CategoryListComponent implements OnInit {
   constructor(private categoryService: CategoryMenuService) {}
 
   ngOnInit(): void {
-    this.categoryService.getAllCategoryMenu().subscribe((data) => {
-      this.categories = data; // Assign fetched data to the array
-      this.selectedCategory = this.categories[0];
-    });
+    // this.categoryService.getAllCategoryMenu().subscribe((data) => {
+    //   this.categories = data; // Assign fetched data to the array
+    //   this.selectedCategory = this.categories[0];
+    // });
+
+    this.categories = [
+      {
+        categoryId: '9e64c7e3-6562-4bb3-9ff1-ea1f9325155a',
+        categoryName: 'Cakes',
+        items: [
+          {
+            menuId: '77add31a-8536-4e6b-9a13-e878ffda9a55',
+            itemName: 'Mojito',
+            price: 500.0,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '9e64c7e3-6562-4bb3-9ff1-ea1f9325155a',
+          },
+          {
+            menuId: 'b49fb209-c770-4e78-96a8-d36416379380',
+            itemName: 'Gin',
+            price: 500.0,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '9e64c7e3-6562-4bb3-9ff1-ea1f9325155a',
+          },
+        ],
+      },
+      {
+        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+        categoryName: 'Beverages',
+        items: [
+          {
+            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb5',
+            itemName: 'Strawberry',
+            price: 500.0,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+          },
+          {
+            menuId: 'd83573c6-4875-40e9-9a45-a1795a1d8f78',
+            itemName: 'BlackForest',
+            price: 500.0,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+          },
+        ],
+      },
+    ];
+    this.selectedCategory = this.categories[0];
   }
 
   // Set the selected category
