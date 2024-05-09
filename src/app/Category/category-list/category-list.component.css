@@ -1,0 +1,25 @@
+.menu-list {
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    gap: 10px; /* Add spacing between items */
+  }
+  
+  .menu-list p {
+    display: flex; /* Use flexbox for button alignment */
+    align-items: center; /* Align text and buttons */
+    gap: 10px; /* Add spacing between text and buttons */
+  }
+
+  .button {
+    padding: 5px 10px; /* Add padding for button spacing */
+    margin: 0 5px; /* Add margin to create spacing between buttons */
+    background-color: #007bff; /* Set button background color */
+    color: white; /* Set button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .button:hover {
+    background-color: #0056b3; /* Darken background on hover */
+  }

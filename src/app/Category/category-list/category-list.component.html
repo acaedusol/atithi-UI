@@ -13,6 +13,18 @@
   <!-- Display menu items for the selected category -->
   <div *ngFor="let item of getMenuItemsForSelectedCategory()">
     <p>{{ item.itemName }} - {{ item.price | currency : "INR" : "₹" }}</p>
-    <!-- Display item name and price -->
+    <button
+      class="button"
+      *ngIf="showAddButton(item)"
+      (click)="selectItem(item)"
+    >
+      Add
+    </button>
+    <div *ngIf="showIncrementDecrementButtons(item)">
+      <!-- Apply the same CSS class to the "+" and "-" buttons -->
+      <button class="button" (click)="increaseItem(item)">+</button>
+      {{ getItemQuantity(item) }}
+      <button class="button" (click)="reduceItem(item)">-</button>
+    </div>
   </div>
 </div>
