@@ -1,0 +1,18 @@
+<div class="category-list">
+  <!-- Display all categories as buttons -->
+  <button
+    *ngFor="let category of categories"
+    (click)="selectCategory(category)"
+    [class.active]="selectedCategory?.categoryId === category.categoryId"
+  >
+    {{ category.categoryName }}
+  </button>
+</div>
+
+<div class="menu-list">
+  <!-- Display menu items for the selected category -->
+  <div *ngFor="let item of getMenuItemsForSelectedCategory()">
+    <p>{{ item.itemName }} - {{ item.price | currency : "INR" : "₹" }}</p>
+    <!-- Display item name and price -->
+  </div>
+</div>
