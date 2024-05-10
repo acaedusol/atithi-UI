@@ -8,10 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, RouterOutlet, Routes } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrderDataService } from './Service/OrderData/order-data.service';
-import { CategoryMenuService } from './Service/CategoryMenu/categorymenu.service';
+import { CategoryMenuService } from './service/CategoryMenu/categorymenu.service';
 import { CategoryComponent } from './category/category.component';
 import { CommonModule } from '@angular/common';
+import { OrderDataService } from './Service/OrderData/order-data.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
