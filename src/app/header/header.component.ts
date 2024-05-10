@@ -15,7 +15,10 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.orderDataService.orderItems$.subscribe((order) => {
       this.orderItems = order;
-      this.cartCount = this.orderItems.length; // Update cart count
+      this.cartCount = this.orderItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      ); // Update cart count
     });
   }
 }

@@ -9,13 +9,16 @@ import { OrderItem } from '../Models/Order';
 })
 export class FooterComponent implements OnInit {
   orderItems: OrderItem[] = [];
-  cartCount: Number = 0;
+  cartCount: number = 0;
   constructor(private orderDataService: OrderDataService) {}
 
   ngOnInit(): void {
     this.orderDataService.orderItems$.subscribe((order) => {
       this.orderItems = order;
-      this.cartCount = this.orderItems.length; // Update cart count
+      this.cartCount = this.orderItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      ); // Update cart count
     });
   }
 }
