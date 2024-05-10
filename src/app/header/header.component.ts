@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OrderItem } from '../Models/Order';
 import { OrderDataService } from '../service/OrderData/order-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,10 @@ import { OrderDataService } from '../service/OrderData/order-data.service';
 export class HeaderComponent {
   orderItems: OrderItem[] = [];
   cartCount: number = 0;
-  constructor(private orderDataService: OrderDataService) {}
+  constructor(
+    private orderDataService: OrderDataService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.orderDataService.orderItems$.subscribe((order) => {
@@ -20,5 +24,12 @@ export class HeaderComponent {
         0
       ); // Update cart count
     });
+  }
+  proceedCheckOut() {
+    if (this.cartCount === 0) {
+      this.router.navigate(['empty']);
+    } else {
+      this.router.navigate(['checkout']);
+    }
   }
 }

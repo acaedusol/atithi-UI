@@ -4,8 +4,7 @@ import { Category, CategoryItems, MenuItem } from '../Models/Category';
 import { OrderItem } from '../Models/Order';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-category',
@@ -19,8 +18,6 @@ export class CategoryComponent implements OnInit {
   constructor(
     private categoryService: CategoryMenuService,
     private orderDataService: OrderDataService,
-    private location: Location,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -252,11 +249,5 @@ export class CategoryComponent implements OnInit {
     return existingItem ? existingItem.quantity : 0; // Return 0 if not found
   }
 
-  backButtonClicked() {
-    try {
-      this.location.back(); // Navigate back
-    } catch (error) {
-      this.router.navigate(['/home']); // Fallback navigation
-    }
-  }
+  
 }

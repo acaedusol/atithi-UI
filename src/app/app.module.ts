@@ -16,6 +16,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { EmptyCartComponent } from './empty-cart/empty-cart.component';
+import { ItemHeaderComponent } from './item-header/item-header.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +25,7 @@ export const routes: Routes = [
   { path: 'item-list', component: CategoryComponent },
   { path: 'confirm', component: OrderConfirmationComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'empty', component: EmptyCartComponent },
 ];
 
 @NgModule({
@@ -34,6 +37,8 @@ export const routes: Routes = [
     OrderConfirmationComponent,
     HeaderComponent,
     FooterComponent,
+    EmptyCartComponent,
+    ItemHeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,9 @@
 <div
-  class="tw-max-w-3xl tw-w-full tw-m-auto tw-min-h-screen"
-  [ngClass]="showHeader ? 'tw-pt-14 tw-pb-12' : ''"
+  class="tw-max-w-3xl tw-w-full tw-m-auto tw-pb-12 tw-min-h-screen"
+  [ngClass]="showHeader ? 'tw-pt-14' : ''"
 >
   <app-header *ngIf="showHeader"></app-header>
+  <app-item-header *ngIf="!showHeader"></app-item-header>
 
   <div
     class="tw-w-full tw-overflow-x-hidden tw-border tw-border-t-0 tw-border-solid tw-border-[rgba(0,0,0,0.1)]"
