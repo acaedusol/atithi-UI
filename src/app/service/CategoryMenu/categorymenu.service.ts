@@ -18,6 +18,9 @@ export class CategoryMenuService {
   private menuItemSubject = new BehaviorSubject<MenuItem[]>([]);
   menuItem$ = this.menuItemSubject.asObservable();
 
+  private selectedCategorySubject = new BehaviorSubject<Category | null>(null);
+  selectedCategory$ = this.selectedCategorySubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getAllCategoryMenu(): Observable<Category[]> {
@@ -52,5 +55,9 @@ export class CategoryMenuService {
 
   getMenuItems(): MenuItem[] {
     return this.menuItemSubject.value;
+  }
+
+  setSelectedCategories(item: Category) {
+    this.selectedCategorySubject.next(item);
   }
 }

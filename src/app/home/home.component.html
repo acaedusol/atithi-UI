@@ -161,6 +161,7 @@
     <div
       class="tw-w-[165px] tw-h-[142px] tw-mr-[17px] tw-my-2 tw-inline-block tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
       *ngFor="let item of getAllCategory()"
+      (click)="onCategoryClick(item)"
     >
       <figure
         class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"

@@ -4,6 +4,7 @@ import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.servic
 import { Category, CategoryItems, MenuItem } from '../Models/Category';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { OrderItem } from '../Models/Order';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -40,7 +41,8 @@ export class HomeComponent {
   orderItems: OrderItem[] = [];
   constructor(
     private categoryService: CategoryMenuService,
-    private orderDataService: OrderDataService
+    private orderDataService: OrderDataService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +87,22 @@ export class HomeComponent {
             categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
           },
           {
+            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb4',
+            itemName: 'Strawberry',
+            price: 500,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+          },
+          {
+            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb6',
+            itemName: 'Strawberry',
+            price: 500,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+          },
+          {
             menuId: 'd83573c6-4875-40e9-9a45-a1795a1d8f78',
             itemName: 'BlackForest',
             price: 500,
@@ -95,73 +113,72 @@ export class HomeComponent {
         ],
       },
       {
-        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc59',
         categoryName: 'Fast Food',
         items: [
           {
-            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb5',
+            menuId: 'c36eba8a-bd38-4a36-a69b-534154d3cfb5',
             itemName: 'Chilli Potato',
             price: 500,
             availability: true,
             imagePath: 'string',
-            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc59',
           },
           {
-            menuId: 'd83573c6-4875-40e9-9a45-a1795a1d8f78',
+            menuId: 'd83573c6-4875-40e9-9a45-534154d3cf78',
             itemName: 'FriedRice',
             price: 500,
             availability: true,
             imagePath: 'string',
-            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc59',
           },
         ],
       },
       {
-        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc60',
         categoryName: 'Fast Food',
         items: [
           {
-            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb5',
+            menuId: 'c36eba8a-bd38-4a36-a69b-534154d3cfb5',
             itemName: 'Chilli Potato',
             price: 500,
             availability: true,
             imagePath: 'string',
-            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc60',
           },
           {
-            menuId: 'd83573c6-4875-40e9-9a45-a1795a1d8f78',
+            menuId: 'd83573c6-4875-40e9-9a45-534154d3cf78',
             itemName: 'FriedRice',
             price: 500,
             availability: true,
             imagePath: 'string',
-            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc60',
           },
         ],
       },
       {
-        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc68',
         categoryName: 'Fast Food',
         items: [
           {
-            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb5',
+            menuId: '52895bf5-bd38-4a36-a69b-61a56b302fb5',
             itemName: 'Chilli Potato',
             price: 500,
             availability: true,
             imagePath: 'string',
-            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc68',
           },
           {
-            menuId: 'd83573c6-4875-40e9-9a45-a1795a1d8f78',
+            menuId: '52895bf5-4875-40e9-9a45-a1795a1d8f78',
             itemName: 'FriedRice',
             price: 500,
             availability: true,
             imagePath: 'string',
-            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc68',
           },
         ],
       },
     ];
-    this.selectedCategory = this.categories[0];
     this.categoryService.setCategories(this.categories);
   }
 
@@ -176,7 +193,11 @@ export class HomeComponent {
   }
 
   getAllCategory(): CategoryItems[] {
-    return this.categoryService.getCategoryItems();
+    var categoryItems: CategoryItems[] = [];
+    this.categoryService.categoryItem$.subscribe((data) => {
+      categoryItems = data;
+    });
+    return categoryItems;
   }
 
   updateOrderItems(): void {
@@ -243,5 +264,12 @@ export class HomeComponent {
     );
 
     return existingItem ? existingItem.quantity : 0; // Return 0 if not found
+  }
+  onCategoryClick(item: CategoryItems) {
+    var selectedCategoryValue = this.categories.filter(
+      (data) => data.categoryId === item.categoryId
+    );
+    this.categoryService.setSelectedCategories(selectedCategoryValue[0]);
+    this.router.navigate(['/item-list']);
   }
 }

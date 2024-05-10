@@ -20,10 +20,21 @@ import { FooterComponent } from './footer/footer.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'item-list', component: CategoryComponent },
+  { path: 'confirm', component: OrderConfirmationComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, CategoryComponent, CheckoutComponent, OrderConfirmationComponent, HeaderComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    CategoryComponent,
+    CheckoutComponent,
+    OrderConfirmationComponent,
+    HeaderComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     RouterOutlet,
@@ -34,6 +45,7 @@ export const routes: Routes = [
     BrowserAnimationsModule,
     CarouselModule,
   ],
+  exports: [RouterModule],
   providers: [OrderDataService, CategoryMenuService],
   bootstrap: [AppComponent],
 })
