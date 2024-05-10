@@ -5,6 +5,7 @@ import { OrderItem } from '../../../Models/Order';
 import { CategoryMenuService } from '../../service/CategoryMenu/categorymenu.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { OrderDataService } from '../../service/OrderData/order-data.service';
 
 @Component({
   selector: 'app-category-list',
@@ -12,13 +13,16 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, HttpClientModule],
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.css'],
-  providers: [CategoryMenuService],
+  providers: [CategoryMenuService, OrderDataService],
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[] = []; // Array to hold fetched categories
   selectedCategory: Category | undefined;
   orderItems: OrderItem[] = [];
-  constructor(private categoryService: CategoryMenuService) {}
+  constructor(
+    private categoryService: CategoryMenuService,
+    private orderDataService: OrderDataService
+  ) {}
 
   ngOnInit(): void {
     // this.categoryService.getAllCategoryMenu().subscribe((data) => {
@@ -73,6 +77,7 @@ export class CategoryListComponent implements OnInit {
       },
     ];
     this.selectedCategory = this.categories[0];
+    this.categoryService.setCategories(this.categories);
   }
 
   // Set the selected category
@@ -83,6 +88,10 @@ export class CategoryListComponent implements OnInit {
   // Get menu items for the selected category
   getMenuItemsForSelectedCategory(): MenuItem[] {
     return this.selectedCategory ? this.selectedCategory.items : [];
+  }
+
+  updateOrderItems(): void {
+    this.orderDataService.setOrderItems(this.orderItems);
   }
 
   selectItem(item: MenuItem): void {
@@ -96,6 +105,7 @@ export class CategoryListComponent implements OnInit {
       // Add the item with a quantity of 1
       this.orderItems.push({ menuItemId: item.menuId, quantity: 1 });
     }
+    this.updateOrderItems();
   }
 
   // Increase the quantity of an order item
@@ -107,6 +117,7 @@ export class CategoryListComponent implements OnInit {
     if (existingItem) {
       existingItem.quantity += 1; // Increase by 1
     }
+    this.updateOrderItems();
   }
 
   // Reduce the quantity of an order item
@@ -122,6 +133,7 @@ export class CategoryListComponent implements OnInit {
         (orderItem) => orderItem.menuItemId !== item.menuId
       ); // Remove the item if quantity is 0
     }
+    this.updateOrderItems();
   }
 
   // Determine whether the "Add" button should be shown
