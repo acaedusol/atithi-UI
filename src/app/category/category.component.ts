@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Category, MenuItem } from '../Models/Category';
 import { OrderItem } from '../Models/Order';
-import { OrderDataService } from '../Service/OrderData/order-data.service';
-import { CategoryMenuService } from '../Service/CategoryMenu/categorymenu.service';
+import { OrderDataService } from '../service/OrderData/order-data.service';
+import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
 
 @Component({
   selector: 'app-category',

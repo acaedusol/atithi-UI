@@ -1,0 +1,55 @@
+.menu-list {
+  display: flex; /* Enable flexbox layout */
+  flex-direction: column; /* Arrange items in a column */
+  gap: 10px; /* Add spacing between items */
+}
+
+.menu-list p {
+  display: flex; /* Use flexbox for button alignment */
+  align-items: center; /* Align text and buttons */
+  gap: 10px; /* Add spacing between text and buttons */
+}
+
+.button {
+  padding: 5px 10px; /* Add padding for button spacing */
+  margin: 0 5px; /* Add margin to create spacing between buttons */
+  background-color: #007bff; /* Set button background color */
+  color: white; /* Set button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.button:hover {
+  background-color: #0056b3; /* Darken background on hover */
+}
+
+/* src/app/components/category-menu/category-menu.component.css */
+.category-list {
+  display: flex; /* Flexbox layout for spacing */
+  gap: 10px; /* Add spacing between items */
+  align-items: center; /* Align items vertically */
+  justify-content: flex-start; /* Align items to the start */
+  width: 438px; /* Set the specified width */
+  height: 49px; /* Set the specified height */
+  background-color: #05162e; /* Set the background color */
+}
+
+.category-list button {
+  padding: 5px 10px; /* Add padding to buttons */
+  background-color: #05162e; /* Set the button background color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  color: #ffffff;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: opacity 0.3s; /* Smooth transition for opacity */
+}
+
+.category-list button.active {
+  background-color: #05162e; /* Active button background color */
+  color: #fff; /* Active button text color */
+}
+
+.category-list button:hover {
+  opacity: 0.8; /* Change opacity on hover */
+}

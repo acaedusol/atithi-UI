@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CategoryMenuService } from '../Service/CategoryMenu/categorymenu.service';
+import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
 
 @Component({
   selector: 'app-home',
