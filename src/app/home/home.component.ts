@@ -11,31 +11,6 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 2,
-      },
-      740: {
-        items: 3,
-      },
-      940: {
-        items: 4,
-      },
-    },
-    nav: true,
-  };
-
   categories: Category[] = []; // Array to hold fetched categories
   selectedCategory: Category | undefined;
   orderItems: OrderItem[] = [];
@@ -180,6 +155,9 @@ export class HomeComponent {
       },
     ];
     this.categoryService.setCategories(this.categories);
+    this.orderDataService.orderItems$.subscribe((order) => {
+      this.orderItems = order;
+    });
   }
 
   // Set the selected category

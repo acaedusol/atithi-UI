@@ -37,6 +37,15 @@
         fill="white"
       />
     </svg>
-    <span class="tw-text-[10px] tw-font-medium tw-leading-3">Empty</span>
+    <span
+      *ngIf="cartCount === 0"
+      class="tw-text-[10px] tw-font-medium tw-leading-3"
+      >Empty</span
+    >
+    <span
+      *ngIf="cartCount > 0"
+      class="tw-text-[10px] tw-font-medium tw-leading-3"
+      >{{ cartCount }} item</span
+    >
   </button>
 </header>
