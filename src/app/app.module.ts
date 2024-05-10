@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { OrderDataService } from './service/OrderData/order-data.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,7 +23,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, CategoryComponent, CheckoutComponent, OrderConfirmationComponent],
+  declarations: [AppComponent, HomeComponent, CategoryComponent, CheckoutComponent, OrderConfirmationComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     RouterOutlet,
