@@ -47,6 +47,7 @@
     </div>
   </div>
 </div>
+<!--Start from here-->
 <div class="tw-py-[15px]">
   <h2
     class="tw-flex tw-flex-row tw-justify-start tw-items-center tw-gap-[10px] tw-pl-4 tw-mb-[19px]"
@@ -72,159 +73,61 @@
       >Recommended Items</span
     >
   </h2>
-  <div class="tw-flex tw-flex-row tw-gap-[17px]">
-    <owl-carousel-o [options]="customOptions">
-      <ng-template carouselSlide>
-        <div class="tw-ml-4">
-          <div
-            class="tw-w-[143px] tw-h-[185px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+  <div class="tw-flex tw-flex-row tw-gap-[17px]"></div>
+  <div class="tw-flex tw-flex-row tw-overflow-x-auto tw-gap-[17px]">
+    <div
+      class="tw-w-[143px] tw-h-[185px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+      *ngFor="let item of getMenuItemsForSelectedCategory()"
+    >
+      <figure
+        class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
+      >
+        <img
+          class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
+          src="../../assets/images/list-item-1.png"
+          alt="list-item-1"
+        />
+        <figcaption
+          class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
+        >
+          {{ item.itemName }}
+        </figcaption>
+      </figure>
+      <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
+        <span
+          class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
+          >{{ item.price | currency : "INR" : "₹" }}</span
+        >
+        <button
+          class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
+          *ngIf="showAddButton(item)"
+          (click)="selectItem(item)"
+        >
+          Add
+        </button>
+        <span
+          *ngIf="showIncrementDecrementButtons(item)"
+          class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
+        >
+          <button
+            (click)="reduceItem(item)"
+            class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
           >
-            <figure
-              class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
-            >
-              <img
-                class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
-                src="../../assets/images/list-item-1.png"
-                alt="list-item-1"
-              />
-              <figcaption
-                class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-              >
-                Foodish Cheeseburger
-              </figcaption>
-            </figure>
-            <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
-              <span
-                class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-                >₹ 150</span
-              >
-              <button
-                class="tw-hidden tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
-              >
-                Add
-              </button>
-              <span
-                class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
-              >
-                <button
-                  class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-                >
-                  -
-                </button>
-                <span
-                  class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
-                  >1</span
-                >
-                <button
-                  class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-                >
-                  +
-                </button>
-              </span>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div>
-          <div
-            class="tw-w-[143px] tw-h-[185px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+            -
+          </button>
+          <span
+            class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
+            >{{ getItemQuantity(item) }}</span
           >
-            <figure
-              class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
-            >
-              <img
-                class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
-                src="../../assets/images/list-item-1.png"
-                alt="list-item-1"
-              />
-              <figcaption
-                class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-              >
-                Foodish Cheeseburger
-              </figcaption>
-            </figure>
-            <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
-              <span
-                class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-                >₹ 150</span
-              >
-              <button
-                class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div>
-          <div
-            class="tw-w-[143px] tw-h-[185px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+          <button
+            (click)="increaseItem(item)"
+            class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
           >
-            <figure
-              class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
-            >
-              <img
-                class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
-                src="../../assets/images/list-item-1.png"
-                alt="list-item-1"
-              />
-              <figcaption
-                class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-              >
-                Foodish Cheeseburger
-              </figcaption>
-            </figure>
-            <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
-              <span
-                class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-                >₹ 150</span
-              >
-              <button
-                class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div>
-          <div
-            class="tw-w-[143px] tw-h-[185px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
-          >
-            <figure
-              class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
-            >
-              <img
-                class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
-                src="../../assets/images/list-item-1.png"
-                alt="list-item-1"
-              />
-              <figcaption
-                class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-              >
-                Foodish Cheeseburger
-              </figcaption>
-            </figure>
-            <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
-              <span
-                class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-                >₹ 150</span
-              >
-              <button
-                class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </owl-carousel-o>
+            +
+          </button>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -296,5 +199,3 @@
     </div>
   </div>
 </div>
-
-<app-category></app-category>
