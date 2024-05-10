@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
-import { Category, MenuItem } from '../Models/Category';
+import { Category, CategoryItems, MenuItem } from '../Models/Category';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { OrderItem } from '../Models/Order';
 @Component({
@@ -40,7 +40,7 @@ export class HomeComponent {
   orderItems: OrderItem[] = [];
   constructor(
     private categoryService: CategoryMenuService,
-    private orderDataService: OrderDataService,
+    private orderDataService: OrderDataService
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +94,28 @@ export class HomeComponent {
           },
         ],
       },
+      {
+        categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+        categoryName: 'Fast Food',
+        items: [
+          {
+            menuId: 'c36eba8a-bd38-4a36-a69b-61a56b302fb5',
+            itemName: 'Chilli Potato',
+            price: 500,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+          },
+          {
+            menuId: 'd83573c6-4875-40e9-9a45-a1795a1d8f78',
+            itemName: 'FriedRice',
+            price: 500,
+            availability: true,
+            imagePath: 'string',
+            categoryId: '52895bf5-23f0-421b-a53d-534154d3cc58',
+          },
+        ],
+      },
     ];
     this.selectedCategory = this.categories[0];
     this.categoryService.setCategories(this.categories);
@@ -107,6 +129,10 @@ export class HomeComponent {
   // Get menu items for the selected category
   getMenuItemsForSelectedCategory(): MenuItem[] {
     return this.categoryService.getMenuItems();
+  }
+
+  getAllCategory(): CategoryItems[] {
+    return this.categoryService.getCategoryItems();
   }
 
   updateOrderItems(): void {

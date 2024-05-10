@@ -156,46 +156,26 @@
       >Categories</span
     >
   </h2>
-  <div class="tw-flex tw-flex-row tw-gap-[17px]">
-    <div class="tw-ml-4">
-      <div
-        class="tw-w-[165px] tw-h-[142px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+  <div class="tw-overflow-x-auto tw-flex tw-flex-row tw-gap-[17px] tw-ml-4">
+    <!-- Loop through categories to create a horizontal list -->
+    <div
+      class="tw-w-[165px] tw-h-[142px] tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+      *ngFor="let item of getAllCategory()"
+    >
+      <figure
+        class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
       >
-        <figure
-          class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
+        <img
+          class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[4px]"
+          src="../../assets/images/category-1.png"
+          alt="{{ item.categoryName }}"
+        />
+        <figcaption
+          class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
         >
-          <img
-            class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[4px]"
-            src="../../assets/images/category-1.png"
-            alt="list-item-1"
-          />
-          <figcaption
-            class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-          >
-            Milk and Breakfast
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div>
-      <div
-        class="tw-w-[165px] tw-h-[142px] tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
-      >
-        <figure
-          class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
-        >
-          <img
-            class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[4px]"
-            src="../../assets/images/category-2.png"
-            alt="list-item-1"
-          />
-          <figcaption
-            class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-          >
-            Drinks
-          </figcaption>
-        </figure>
-      </div>
+          {{ item.categoryName }}
+        </figcaption>
+      </figure>
     </div>
   </div>
 </div>
