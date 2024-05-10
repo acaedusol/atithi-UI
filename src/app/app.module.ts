@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryMenuService } from './service/CategoryMenu/categorymenu.service';
 import { CategoryComponent } from './category/category.component';
 import { CommonModule } from '@angular/common';
-import { OrderDataService } from './Service/OrderData/order-data.service';
+import { OrderDataService } from './service/OrderData/order-data.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
