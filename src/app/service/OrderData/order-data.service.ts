@@ -1,7 +1,7 @@
 // src/app/services/order-data.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { OrderItem } from '../../../Models/Order';
+import { OrderItem } from '../../Models/Order';
 
 @Injectable({
   providedIn: 'root', // Available globally

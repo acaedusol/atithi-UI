@@ -1,0 +1,31 @@
+<div class="category-list">
+    <!-- Display all categories as buttons -->
+    <button
+      *ngFor="let category of categories"
+      (click)="selectCategory(category)"
+      [class.active]="selectedCategory?.categoryId === category.categoryId"
+    >
+      {{ category.categoryName }}
+    </button>
+  </div>
+  
+  <div class="menu-list">
+    <!-- Display menu items for the selected category -->
+    <div *ngFor="let item of getMenuItemsForSelectedCategory()">
+      <p>{{ item.itemName }} - {{ item.price | currency : "INR" : "₹" }}</p>
+      <button
+        class="button"
+        *ngIf="showAddButton(item)"
+        (click)="selectItem(item)"
+      >
+        Add
+      </button>
+      <div *ngIf="showIncrementDecrementButtons(item)">
+        <!-- Apply the same CSS class to the "+" and "-" buttons -->
+        <button class="button" (click)="increaseItem(item)">+</button>
+        {{ getItemQuantity(item) }}
+        <button class="button" (click)="reduceItem(item)">-</button>
+      </div>
+    </div>
+  </div>
+  
