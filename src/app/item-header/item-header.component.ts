@@ -32,7 +32,12 @@ export class ItemHeaderComponent {
 
   backButtonClicked() {
     try {
-      if (this.orderDataService.getOrderItems().length === 0) {
+      const urlParts = this.router.url.split('/');
+      const lastIndex = urlParts[urlParts.length - 1];
+      if (
+        this.orderDataService.getOrderItems().length === 0 ||
+        lastIndex === 'confirm'
+      ) {
         this.router.navigate(['/home']);
       } else {
         this.location.back(); // Navigate back
