@@ -39,6 +39,7 @@
     <div>
       <div
         class="tw-h-[106px] tw-flex tw-flex-row tw-gap-[18px] tw-mb-6 tw-w-full"
+        *ngFor="let item of getMenuItemsForSelectedCategory()"
       >
         <div
           class="tw-h-[108px] tw-w-[108px] tw-p-4 tw-shadow-[3px_0px_10px_0px_rgba(116,65,0,0.3)] tw-text-center"
@@ -54,12 +55,12 @@
             <h3
               class="tw-text-lg tw-leading-[22px] tw-font-medium tw-text-[#424242] tw-mb-2"
             >
-              Margaritte Pizza
+              {{ item.itemName }}
             </h3>
             <div
               class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B] tw-mb-[6px]"
             >
-              ₹ 150
+              ₹ {{ item.price }}
             </div>
             <div
               class="tw-text-[12px] tw-leading-[14px] tw-font-normal tw-text-[#424242] tw-mb-[7px]"
@@ -67,106 +68,34 @@
               Quantity
             </div>
           </div>
+          <button
+            class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
+            *ngIf="showAddButton(item)"
+            (click)="selectItem(item)"
+          >
+            Add
+          </button>
           <span
+            *ngIf="showIncrementDecrementButtons(item)"
             class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
           >
             <button
+              (click)="reduceItem(item)"
               class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
             >
               -
             </button>
             <span
               class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
-              >1</span
+              >{{ getItemQuantity(item) }}</span
             >
             <button
+              (click)="increaseItem(item)"
               class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
             >
               +
             </button>
           </span>
-          <div
-            class="tw-w-[19px] tw-h-[18px] tw-p-1 tw-rounded-[3px] tw-bg-[#F6A60B] tw-absolute tw-right-0 tw-top-0"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="8"
-              viewBox="0 0 11 8"
-              fill="none"
-            >
-              <path
-                d="M3.59213 5.96565L1.07909 3.5968L0 4.61397L3.59213 8L11 1.01717L9.92091 0L3.59213 5.96565Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div
-        class="tw-h-[106px] tw-flex tw-flex-row tw-gap-[18px] tw-mb-6 tw-w-full"
-      >
-        <div
-          class="tw-h-[108px] tw-w-[108px] tw-p-4 tw-shadow-[3px_0px_10px_0px_rgba(116,65,0,0.3)] tw-text-center"
-        >
-          <img
-            class="tw-w-auto tw-h-auto tw-max-h-full tw-max-w-full tw-m-auto"
-            src="../../assets/images/list-item-2.png"
-            alt=""
-          />
-        </div>
-        <div class="tw-relative tw-pr-10">
-          <div class="tw-mb-[7px]">
-            <h3
-              class="tw-text-lg tw-leading-[22px] tw-font-medium tw-text-[#424242] tw-mb-2"
-            >
-              Margaritte Pizza
-            </h3>
-            <div
-              class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B] tw-mb-[6px]"
-            >
-              ₹ 150
-            </div>
-            <div
-              class="tw-text-[12px] tw-leading-[14px] tw-font-normal tw-text-[#424242] tw-mb-[7px]"
-            >
-              Quantity
-            </div>
-          </div>
-          <span
-            class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
-          >
-            <button
-              class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-            >
-              -
-            </button>
-            <span
-              class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
-              >1</span
-            >
-            <button
-              class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-            >
-              +
-            </button>
-          </span>
-          <div
-            class="tw-w-[19px] tw-h-[18px] tw-p-1 tw-rounded-[3px] tw-bg-[#F6A60B] tw-absolute tw-right-0 tw-top-0"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="8"
-              viewBox="0 0 11 8"
-              fill="none"
-            >
-              <path
-                d="M3.59213 5.96565L1.07909 3.5968L0 4.61397L3.59213 8L11 1.01717L9.92091 0L3.59213 5.96565Z"
-                fill="white"
-              />
-            </svg>
-          </div>
         </div>
       </div>
     </div>
@@ -183,7 +112,7 @@
         >
         <span
           class="tw-text-[11px] tw-leading-[13px] tw-text-[#424242] tw-font-medium"
-          >₹ 300</span
+          >₹ {{ totalPrice }}</span
         >
       </div>
       <div class="tw-flex tw-justify-between tw-flex-row tw-mb-[15px]">
@@ -193,7 +122,7 @@
         >
         <span
           class="tw-text-[11px] tw-leading-[13px] tw-text-[#424242] tw-font-medium"
-          >₹ 50</span
+          >₹ {{ gst }}</span
         >
       </div>
       <div class="tw-flex tw-justify-between tw-flex-row tw-mb-[15px]">
@@ -214,17 +143,18 @@
           >Total</strong
         >
         <span class="tw-text-[#424242] tw-text-sm tw-leading-[17px] tw-ml-3"
-          >(2 Item)</span
+          >({{ cartCount }} Item)</span
         >
       </span>
       <span
         class="tw-text-[#F6A60B] tw-text-2xl tw-leading-[29px] tw-font-medium"
-        >₹ 380</span
+        >₹ {{ totalItemPrice }}</span
       >
     </div>
     <div class="tw-mb-[15px] tw-text-center">
       <button
         class="tw-w-full tw-max-w-[320px] tw-h-14 tw-bg-[#05162E] tw-text-white tw-text-2xl tw-font-medium tw-rounded"
+        (click)="navigateToConfirmPage()"
       >
         Place Order
       </button>
