@@ -80,7 +80,7 @@
       (wheel)="onWheel($event)"
     >
       <div
-        class="tw-w-[143px] tw-h-[185px] tw-my-2 tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+        class="tw-min-w-[143px] tw-h-[185px] tw-my-2 tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
         *ngFor="let item of getMenuItemsForSelectedCategory()"
       >
         <figure
@@ -168,7 +168,7 @@
     >
       <!-- Loop through categories to create a horizontal list -->
       <div
-        class="tw-w-[165px] tw-h-[142px] tw-mr-[17px] tw-my-2 tw-inline-block tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+        class="tw-min-w-[165px] tw-h-[142px] tw-mr-[17px] tw-my-2 tw-inline-block tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
         *ngFor="let item of getAllCategory()"
         (click)="onCategoryClick(item)"
       >
