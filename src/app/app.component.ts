@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
   showHeader = false;
+  showFooter = false;
 
   constructor(private router: Router) {}
 
@@ -15,8 +16,10 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // List of routes where the header should be hidden
-        const routesWithoutHeader = ['/home'];
-        this.showHeader = routesWithoutHeader.includes(this.router.url);
+        const routesWithHeader = ['/home'];
+        this.showHeader = routesWithHeader.includes(this.router.url);
+        const routesWithFooter = ['/home', '/item-list'];
+        this.showFooter = routesWithFooter.includes(this.router.url);
       }
     });
   }

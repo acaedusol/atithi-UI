@@ -13,6 +13,7 @@ export class ItemHeaderComponent {
   showCart = true;
   orderItems: OrderItem[] = [];
   cartCount: number = 0;
+  componentName: string = '';
   constructor(
     private location: Location,
     private router: Router,
@@ -30,8 +31,23 @@ export class ItemHeaderComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // List of routes where the header should be hidden
-        const routesWithoutHeader = ['/item-list'];
-        this.showCart = routesWithoutHeader.includes(this.router.url);
+        const urlParts = this.router.url.split('/');
+        const lastIndex = urlParts[urlParts.length - 1];
+        switch (lastIndex) {
+          case 'item-list':
+            this.componentName = 'Item List';
+            this.showCart = true;
+            break;
+          case 'empty':
+            this.componentName = 'Cart';
+            break;
+          case 'checkout':
+            this.componentName = 'Checkout';
+            break;
+          default:
+            console.log('');
+            this.componentName = 'Order Confirmation';
+        }
       }
     });
   }
