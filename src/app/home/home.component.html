@@ -33,7 +33,7 @@
         <strong>DISCOUNT 25%</strong>
       </p>
       <button
-        class="tw-block tw-w-[132px] tw-h-8 tw-bg-white tw-shadow-[0px_2px_2px_0px_rgba(255,125,11,0.3)] tw-text-[#05162E] tw-text-[12px] tw-leading-[15px]"
+        class="tw-block tw-w-[132px] tw-font-medium tw-h-8 tw-bg-white tw-shadow-[0px_2px_2px_0px_rgba(255,125,11,0.3)] tw-text-[#05162E] tw-text-[12px] tw-leading-[15px]"
       >
         Go to Item
       </button>
@@ -74,58 +74,60 @@
     >
   </h2>
   <div class="tw-flex tw-flex-row tw-gap-[17px]"></div>
-  <div class="tw-flex tw-flex-row tw-overflow-x-auto tw-gap-[17px]">
-    <div
-      class="tw-w-[143px] tw-h-[185px] tw-my-2 tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
-      *ngFor="let item of getMenuItemsForSelectedCategory()"
-    >
-      <figure
-        class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
+  <div class="tw-h-[205px] tw-overflow-hidden">
+    <div class="tw-flex tw-flex-row tw-overflow-x-auto tw-gap-[17px] tw-px-4 tw-h-[225px] tw-overflow-y-hidden" (wheel)="onWheel($event)">
+      <div
+        class="tw-w-[143px] tw-h-[185px] tw-my-2 tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+        *ngFor="let item of getMenuItemsForSelectedCategory()"
       >
-        <img
-          class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
-          src="../../assets/images/list-item-1.png"
-          alt="list-item-1"
-        />
-        <figcaption
-          class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
+        <figure
+          class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
         >
-          {{ item.itemName }}
-        </figcaption>
-      </figure>
-      <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
-        <span
-          class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-          >{{ item.price | currency : "INR" : "₹" }}</span
-        >
-        <button
-          class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
-          *ngIf="showAddButton(item)"
-          (click)="selectItem(item)"
-        >
-          Add
-        </button>
-        <span
-          *ngIf="showIncrementDecrementButtons(item)"
-          class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
-        >
-          <button
-            (click)="reduceItem(item)"
-            class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
+          <img
+            class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[23px]"
+            src="../../assets/images/list-item-1.png"
+            alt="list-item-1"
+          />
+          <figcaption
+            class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
           >
-            -
+            {{ item.itemName }}
+          </figcaption>
+        </figure>
+        <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
+          <span
+            class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
+            >{{ item.price | currency : "INR" : "₹" }}</span
+          >
+          <button
+            class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
+            *ngIf="showAddButton(item)"
+            (click)="selectItem(item)"
+          >
+            Add
           </button>
           <span
-            class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
-            >{{ getItemQuantity(item) }}</span
+            *ngIf="showIncrementDecrementButtons(item)"
+            class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
           >
-          <button
-            (click)="increaseItem(item)"
-            class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-          >
-            +
-          </button>
-        </span>
+            <button
+              (click)="reduceItem(item)"
+              class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
+            >
+              -
+            </button>
+            <span
+              class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
+              >{{ getItemQuantity(item) }}</span
+            >
+            <button
+              (click)="increaseItem(item)"
+              class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
+            >
+              +
+            </button>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -156,27 +158,29 @@
       >Categories</span
     >
   </h2>
-  <div class="tw-w-full tw-overflow-x-auto tw-whitespace-nowrap">
-    <!-- Loop through categories to create a horizontal list -->
-    <div
-      class="tw-w-[165px] tw-h-[142px] tw-mr-[17px] tw-my-2 tw-inline-block tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
-      *ngFor="let item of getAllCategory()"
-      (click)="onCategoryClick(item)"
-    >
-      <figure
-        class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
+  <div class="tw-h-[165px] tw-overflow-hidden">
+    <div class="tw-w-full tw-overflow-x-auto tw-whitespace-nowrap tw-pl-4 tw-h-[185px]" (wheel)="onWheel($event)">
+      <!-- Loop through categories to create a horizontal list -->
+      <div
+        class="tw-w-[165px] tw-h-[142px] tw-mr-[17px] tw-my-2 tw-inline-block tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
+        *ngFor="let item of getAllCategory()"
+        (click)="onCategoryClick(item)"
       >
-        <img
-          class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[4px]"
-          src="../../assets/images/category-1.png"
-          alt="{{ item.categoryName }}"
-        />
-        <figcaption
-          class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
+        <figure
+          class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
         >
-          {{ item.categoryName }}
-        </figcaption>
-      </figure>
+          <img
+            class="tw-w-[82px] tw-h-[76px] tw-mt-[14px] tw-mb-[4px]"
+            src="../../assets/images/category-1.png"
+            alt="{{ item.categoryName }}"
+          />
+          <figcaption
+            class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
+          >
+            {{ item.categoryName }}
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </div>

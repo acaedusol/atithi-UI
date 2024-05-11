@@ -250,4 +250,10 @@ export class HomeComponent {
     this.categoryService.setSelectedCategories(selectedCategoryValue[0]);
     this.router.navigate(['/item-list']);
   }
+
+  onWheel(event: WheelEvent): void {
+    event.preventDefault(); // Prevents default scrolling behavior
+    const container = event.currentTarget as HTMLElement;
+    container.scrollLeft += event.deltaY; // Adjust scrolling speed as needed
+  }
 }

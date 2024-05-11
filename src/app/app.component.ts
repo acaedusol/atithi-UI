@@ -16,6 +16,9 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0); // Reset scroll position on navigation end
+      }
+      if (event instanceof NavigationEnd) {
         // List of routes where the header should be hidden
         const routesWithHeader = ['/home'];
         this.showHeader = routesWithHeader.includes(this.router.url);
