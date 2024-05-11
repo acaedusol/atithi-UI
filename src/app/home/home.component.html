@@ -75,7 +75,10 @@
   </h2>
   <div class="tw-flex tw-flex-row tw-gap-[17px]"></div>
   <div class="tw-h-[205px] tw-overflow-hidden">
-    <div class="tw-flex tw-flex-row tw-overflow-x-auto tw-gap-[17px] tw-px-4 tw-h-[225px] tw-overflow-y-hidden" (wheel)="onWheel($event)">
+    <div
+      class="tw-flex tw-flex-row tw-overflow-x-auto tw-gap-[17px] tw-px-4 tw-h-[225px] tw-overflow-y-hidden"
+      (wheel)="onWheel($event)"
+    >
       <div
         class="tw-w-[143px] tw-h-[185px] tw-my-2 tw-rounded-[4px_0px_0px_0px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
         *ngFor="let item of getMenuItemsForSelectedCategory()"
@@ -97,7 +100,7 @@
         <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
           <span
             class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-            >{{ item.price | currency : "INR" : "₹" }}</span
+            >₹{{ item.price }}</span
           >
           <button
             class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
@@ -159,7 +162,10 @@
     >
   </h2>
   <div class="tw-h-[165px] tw-overflow-hidden">
-    <div class="tw-w-full tw-overflow-x-auto tw-whitespace-nowrap tw-pl-4 tw-h-[185px]" (wheel)="onWheel($event)">
+    <div
+      class="tw-w-full tw-overflow-x-auto tw-whitespace-nowrap tw-pl-4 tw-h-[185px]"
+      (wheel)="onWheel($event)"
+    >
       <!-- Loop through categories to create a horizontal list -->
       <div
         class="tw-w-[165px] tw-h-[142px] tw-mr-[17px] tw-my-2 tw-inline-block tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
