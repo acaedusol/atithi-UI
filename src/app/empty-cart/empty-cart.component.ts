@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { OrderDataService } from '../service/OrderData/order-data.service';
 
 @Component({
   selector: 'app-empty-cart',
@@ -7,8 +8,12 @@ import { Router } from '@angular/router';
   styleUrl: './empty-cart.component.css',
 })
 export class EmptyCartComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private orderDataService: OrderDataService
+  ) {}
   navigateToHomePage() {
+    this.orderDataService.setOrderPlacement();
     this.router.navigate(['/home']);
   }
 }

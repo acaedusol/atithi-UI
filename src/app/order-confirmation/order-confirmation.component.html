@@ -1,7 +1,7 @@
 <div class="tw-pb-5 tw-pt-5 tw-px-6">
   <div class="tw-mb-[66px]">
     <h2
-      class="tw-text-lg tw-font-medium tw-leading-[21px] tw-text-[#424242] tw-mb-[15px]"
+      class="tw-text-lg tw-font-medium tw-leading-[21px] tw-text-[#424242] tw-mb-[16px]"
     >
       Order Summary
     </h2>
@@ -11,11 +11,11 @@
         *ngFor="let item of getMenuItemsForSelectedCategory()"
       >
         <span
-          class="tw-text-[11px] tw-leading-[13px] tw-text-[#424242] tw-font-medium"
+          class="tw-text-[14px] tw-leading-[13px] tw-text-[#424242] tw-font-medium"
           >{{ item.itemName }}
         </span>
         <span
-          class="tw-text-[11px] tw-leading-[13px] tw-text-[#424242] tw-font-medium"
+          class="tw-text-[14px] tw-leading-[13px] tw-text-[#424242] tw-font-medium"
           >x{{ getItemQuantity(item) }}</span
         >
       </div>

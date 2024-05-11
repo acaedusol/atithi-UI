@@ -21,7 +21,7 @@ export class AppComponent {
         this.showHeader = routesWithHeader.includes(this.router.url);
         const routesWithFooter = ['/home', '/item-list'];
         this.showFooter = routesWithFooter.includes(this.router.url);
-
+        this.showCart = false;
         const urlParts = this.router.url.split('/');
         const lastIndex = urlParts[urlParts.length - 1];
         switch (lastIndex) {

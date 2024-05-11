@@ -40,7 +40,7 @@ export class CheckoutComponent {
     }
 
     this.totalPrice = this.fetchOrderDetails();
-    this.gst = this.totalPrice + (this.totalPrice * 5) / 100;
+    this.gst = (this.totalPrice * 5) / 100;
     this.totalItemPrice = this.totalPrice + this.gst + 20;
   }
 
@@ -69,7 +69,7 @@ export class CheckoutComponent {
     }
 
     this.totalPrice = this.fetchOrderDetails();
-    this.gst = this.totalPrice + (this.totalPrice * 5) / 100;
+    this.gst = (this.totalPrice * 5) / 100;
     this.totalItemPrice = this.totalPrice + this.gst + 20;
   }
 

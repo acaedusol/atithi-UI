@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Location } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { OrderItem } from '../Models/Order';
 
