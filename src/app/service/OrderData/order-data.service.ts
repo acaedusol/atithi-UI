@@ -13,6 +13,12 @@ export class OrderDataService {
   // Observable that components can subscribe to
   orderItems$ = this.orderItemsSubject.asObservable();
 
+  // Use a BehaviorSubject to hold the orderItems data
+  private isOrderPlacedSubject = new BehaviorSubject<boolean>(false);
+
+  // Observable that components can subscribe to
+  isOrderPlaced$ = this.isOrderPlacedSubject.asObservable();
+
   // Method to update the orderItems data
   setOrderItems(orderItems: OrderItem[]): void {
     this.orderItemsSubject.next(orderItems);
@@ -21,5 +27,9 @@ export class OrderDataService {
   // Method to get the current orderItems data
   getOrderItems(): OrderItem[] {
     return this.orderItemsSubject.value;
+  }
+
+  setOrderPlacement() {
+    this.orderItemsSubject.next([]);
   }
 }

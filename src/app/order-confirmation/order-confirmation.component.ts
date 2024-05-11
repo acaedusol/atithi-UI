@@ -82,6 +82,7 @@ export class OrderConfirmationComponent {
   }
 
   navigateToHomePage() {
+    this.orderDataService.setOrderPlacement();
     this.router.navigate(['/home']);
   }
 }

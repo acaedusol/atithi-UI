@@ -38,6 +38,7 @@ export class ItemHeaderComponent {
         this.orderDataService.getOrderItems().length === 0 ||
         lastIndex === 'confirm'
       ) {
+        this.orderDataService.setOrderPlacement();
         this.router.navigate(['/home']);
       } else {
         this.location.back(); // Navigate back

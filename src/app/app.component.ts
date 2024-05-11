@@ -26,7 +26,6 @@ export class AppComponent {
         const lastIndex = urlParts[urlParts.length - 1];
         switch (lastIndex) {
           case 'item-list':
-            console.log(lastIndex);
             this.componentName = 'Item List';
             this.showCart = true;
             break;
