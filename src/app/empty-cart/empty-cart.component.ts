@@ -13,7 +13,7 @@ export class EmptyCartComponent {
     private orderDataService: OrderDataService
   ) {}
   navigateToHomePage() {
-    this.orderDataService.setOrderPlacement();
+    this.orderDataService.setOrderPlacement(false);
     this.router.navigate(['/home']);
   }
 }

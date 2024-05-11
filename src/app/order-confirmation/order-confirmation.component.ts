@@ -36,7 +36,7 @@ export class OrderConfirmationComponent {
     });
 
     if (this.orderItems.length === 0) {
-      this.orderDataService.setOrderPlacement();
+      this.orderDataService.setOrderPlacement(false);
       this.router.navigate(['/home']);
     }
 
@@ -83,7 +83,7 @@ export class OrderConfirmationComponent {
   }
 
   navigateToHomePage() {
-    this.orderDataService.setOrderPlacement();
+    this.orderDataService.setOrderPlacement(true);
     this.router.navigate(['/home']);
   }
 }

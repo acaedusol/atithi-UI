@@ -29,7 +29,8 @@ export class OrderDataService {
     return this.orderItemsSubject.value;
   }
 
-  setOrderPlacement() {
+  setOrderPlacement(isOrderPlaced: boolean) {
+    this.isOrderPlacedSubject.next(isOrderPlaced);
     this.orderItemsSubject.next([]);
   }
 }

@@ -14,6 +14,7 @@ export class HomeComponent {
   categories: Category[] = []; // Array to hold fetched categories
   selectedCategory: Category | undefined;
   orderItems: OrderItem[] = [];
+  isOrderPlaced: boolean = false;
   constructor(
     private categoryService: CategoryMenuService,
     private orderDataService: OrderDataService,
@@ -33,6 +34,10 @@ export class HomeComponent {
 
     this.orderDataService.orderItems$.subscribe((order) => {
       this.orderItems = order;
+    });
+
+    this.orderDataService.isOrderPlaced$.subscribe((source) => {
+      this.isOrderPlaced = source;
     });
   }
 
