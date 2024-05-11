@@ -32,7 +32,11 @@ export class ItemHeaderComponent {
 
   backButtonClicked() {
     try {
-      this.location.back(); // Navigate back
+      if (this.orderDataService.getOrderItems().length === 0) {
+        this.router.navigate(['/home']);
+      } else {
+        this.location.back(); // Navigate back
+      }
     } catch (error) {
       this.router.navigate(['/home']); // Fallback navigation
     }
