@@ -34,10 +34,10 @@ export class ItemHeaderComponent {
     try {
       const urlParts = this.router.url.split('/');
       const lastIndex = urlParts[urlParts.length - 1];
-      if (
-        this.orderDataService.getOrderItems().length === 0 ||
-        lastIndex === 'confirm'
-      ) {
+      if (this.orderDataService.getOrderItems().length === 0) {
+        this.orderDataService.setOrderPlacement(false);
+        this.router.navigate(['/home']);
+      } else if (lastIndex === 'confirm') {
         this.orderDataService.setOrderPlacement(true);
         this.router.navigate(['/home']);
       } else {
