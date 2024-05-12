@@ -30,10 +30,9 @@ export class OrderDataService {
       RoomId: this.roomIdSubject.value,
       OrderItems: orderItems,
     };
+    localStorage.removeItem('OrderDetails');
     if (orderItems != null) {
       this.storageService.setObject('OrderDetails', orderDetails);
-    } else {
-      localStorage.removeItem('OrderDetails');
     }
     this.orderItemsSubject.next(orderItems);
   }

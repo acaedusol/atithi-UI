@@ -40,14 +40,11 @@ export class HomeComponent {
 
     var orderDetails = this.storageService.getObject('OrderDetails');
     if (orderDetails?.length == 0) {
-      this.orderDataService.orderItems$.subscribe((order) => {
-        this.orderItems = order;
-      });
+      this.orderItems = [];
     } else {
       this.orderItems = orderDetails['OrderItems'];
-      this.updateOrderItems();
     }
-
+    this.updateOrderItems();
     this.orderDataService.isOrderPlaced$.subscribe((source) => {
       this.isOrderPlaced = source;
     });
