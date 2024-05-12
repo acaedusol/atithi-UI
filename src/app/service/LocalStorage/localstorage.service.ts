@@ -24,7 +24,7 @@ export class LocalStorageService {
     }
 
     let result = JSON.parse(data);
-    if (Date.now() > result.expiryTime) {
+    if (Date.now() > result.expiryTime || key == 'RoomId') {
       localStorage.clear();
       return null;
     }
@@ -47,7 +47,7 @@ export class LocalStorageService {
     }
 
     let result = JSON.parse(data);
-    if (result.expireTime <= Date.now()) {
+    if (result.expireTime <= Date.now() || key == 'RoomId') {
       localStorage.clear();
       return [];
     }
