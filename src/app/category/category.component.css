@@ -53,3 +53,88 @@
 .category-list button:hover {
   opacity: 0.8; /* Change opacity on hover */
 }
+
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  justify-items: center;
+  gap: 18px;
+}
+
+.card {
+  width: 165px;
+  height: 213px;
+  border-radius: 4px;
+  padding: 9px 6px;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 14px;
+  margin-bottom: 23px;
+}
+
+.image img {
+  width: 100%;
+  max-height: 24px;
+  max-width: 82px;
+}
+
+.item-name {
+  font-size: 11px;
+  font-weight: medium;
+  color: #424242;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: medium;
+  color: #ff7d0b;
+}
+
+.add-button {
+  width: 72px;
+  height: 28px;
+  border: 1px solid #f6a60b;
+  border-radius: 3px;
+  color: #f6a60b;
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.quantity-buttons {
+  display: inline-flex;
+  border: 1px solid #f6a60b;
+  border-radius: 3px;
+  width: 75px;
+  height: 25px;
+}
+
+.quantity-buttons button {
+  width: 25px;
+  color: #f6a60b;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.quantity {
+  width: 25px;
+  color: white;
+  font-size: 15px;
+  line-height: 18px;
+  background-color: #f6a60b;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}

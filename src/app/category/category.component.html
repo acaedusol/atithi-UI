@@ -25,92 +25,23 @@
   </nav>
 </div>
 
-<div class="tw-bg-white tw-px-3 tw-py-[19px]">
-  <div class="tw-flex tw-flex-row tw-gap-[17px] tw-flex-wrap tw-justify-center">
-    <div
-      class="tw-w-[165px] tw-h-[213px] tw-rounded-[4px] tw-px-[6px] tw-py-[9px] tw-shadow-[0px_4px_4px_4px_rgba(0,0,0,0.05)]"
-      *ngFor="let item of getMenuItemsForSelectedCategory()"
-    >
-      <figure
-        class="tw-flex tw-w-full tw-items-center tw-flex-col tw-text-center tw-mb-4"
-      >
-        <div class="tw-mt-[14px] tw-mb-[23px] tw-h-24">
-          <img
-            class="tw-w-full tw-h-auto tw-max-h-24 tw-max-w-[82px]"
-            src="../../assets/images/list-item-1.png"
-            alt="{{ item.itemName }}"
-          />
-        </div>
-        <figcaption
-          class="tw-text-[11px] tw-font-medium tw-leading-[13px] tw-text-[#424242]"
-        >
-          {{ item.itemName }}
-        </figcaption>
-      </figure>
-      <div class="tw-flex tw-flex-row tw-justify-between tw-items-center">
-        <span
-          class="tw-text-base tw-leading-[19px] tw-font-medium tw-text-[#FF7D0B]"
-        >
-          ₹ {{ item.price }}
-        </span>
-        <button
-          class="tw-w-[72px] tw-h-6 tw-rounded-[3px] tw-border tw-border-solid tw-border-[#F6A60B] tw-text-[#F6A60B] tw-text-[13px] tw-leading-[15px]"
-          *ngIf="showAddButton(item)"
-          (click)="selectItem(item)"
-        >
-          Add
-        </button>
-        <span
-          *ngIf="showIncrementDecrementButtons(item)"
-          class="tw-inline-flex tw-border tw-border-solid tw-border-[#F6A60B] tw-rounded-[3px] tw-w-[75px] tw-h-[25px]"
-        >
-          <button
-            (click)="reduceItem(item)"
-            class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-          >
-            -
-          </button>
-          <span
-            class="tw-w-[25px] tw-text-white tw-text-[15px] tw-leading-[18px] tw-bg-[#F6A60B] tw-inline-flex tw-justify-center tw-items-center"
-            >{{ getItemQuantity(item) }}</span
-          >
-          <button
-            (click)="increaseItem(item)"
-            class="tw-w-[25px] tw-text-[#F6A60B] tw-text-base tw-leading-[18px]"
-          >
-            +
-          </button>
-        </span>
+<div class="container tw-p-[18px]">
+  <div class="card" *ngFor="let item of getMenuItemsForSelectedCategory()">
+    <figure class="content">
+      <div class="tw-mt-[14px] tw-mb-[23px]">
+        <img  class="tw-w-full tw-h-auto tw-max-h-24 tw-max-w-[82px]" src="../../assets/images/list-item-1.png" alt="{{ item.itemName }}" />
       </div>
+      <figcaption class="item-name">{{ item.itemName }}</figcaption>
+    </figure>
+    <div class="details">
+      <span class="price">₹ {{ item.price }}</span>
+      <button class="add-button" *ngIf="showAddButton(item)" (click)="selectItem(item)">Add</button>
+      <span *ngIf="showIncrementDecrementButtons(item)" class="quantity-buttons">
+        <button (click)="reduceItem(item)">-</button>
+        <span class="quantity">{{ getItemQuantity(item) }}</span>
+        <button (click)="increaseItem(item)">+</button>
+      </span>
     </div>
   </div>
 </div>
-<!-- 
-<div class="category-list">
-    <button
-      *ngFor="let category of categories"
-      (click)="selectCategory(category)"
-      [class.active]="selectedCategory?.categoryId === category.categoryId"
-    >
-      {{ category.categoryName }}
-    </button>
-  </div>
-  
-  <div class="menu-list">
-    <div *ngFor="let item of getMenuItemsForSelectedCategory()">
-      <p>{{ item.itemName }} - {{ item.price | currency : "INR" : "₹" }}</p>
-      <button
-        class="button"
-        *ngIf="showAddButton(item)"
-        (click)="selectItem(item)"
-      >
-        Add
-      </button>
-      <div *ngIf="showIncrementDecrementButtons(item)">
-        <button class="button" (click)="increaseItem(item)">+</button>
-        {{ getItemQuantity(item) }}
-        <button class="button" (click)="reduceItem(item)">-</button>
-      </div>
-    </div>
-  </div>
-   -->
+
