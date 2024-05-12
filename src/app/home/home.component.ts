@@ -38,9 +38,15 @@ export class HomeComponent {
       this.categories = data;
     });
 
-    this.orderDataService.orderItems$.subscribe((order) => {
-      this.orderItems = order;
-    });
+    var orderDetails = this.storageService.getObject('OrderDetails');
+    if (orderDetails?.length == 0) {
+      this.orderDataService.orderItems$.subscribe((order) => {
+        this.orderItems = order;
+      });
+    } else {
+      this.orderItems = orderDetails['OrderItems'];
+      this.updateOrderItems();
+    }
 
     this.orderDataService.isOrderPlaced$.subscribe((source) => {
       this.isOrderPlaced = source;
@@ -60,6 +66,7 @@ export class HomeComponent {
       this.roomId = roomNumber;
       this.router.navigate(['/home/' + this.roomId]);
     }
+    this.orderDataService.setRoomId(Number(this.roomId));
   }
 
   // Set the selected category

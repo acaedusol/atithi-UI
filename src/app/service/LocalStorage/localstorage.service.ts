@@ -10,7 +10,7 @@ export class LocalStorageService {
       data: value,
       expiryTime: Date.now() + maxAge,
     };
-    if (key === 'roomId') {
+    if (key === 'RoomId') {
       localStorage.clear();
     }
     localStorage.setItem(key, JSON.stringify(result));
@@ -25,10 +25,7 @@ export class LocalStorageService {
 
     let result = JSON.parse(data);
     if (Date.now() > result.expiryTime) {
-      if (key === 'RoomId') {
-        localStorage.clear();
-      }
-      localStorage.removeItem(key);
+      localStorage.clear();
       return null;
     }
     return result.data;
@@ -42,7 +39,7 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(result));
   }
 
-  getObject(key: string): object {
+  getObject(key: string): any {
     // get the parsed value of the given key
     let data = localStorage.getItem(key);
     if (data === null) {
@@ -51,7 +48,7 @@ export class LocalStorageService {
 
     let result = JSON.parse(data);
     if (result.expireTime <= Date.now()) {
-      localStorage.removeItem(key);
+      localStorage.clear();
       return [];
     }
     return result.data;

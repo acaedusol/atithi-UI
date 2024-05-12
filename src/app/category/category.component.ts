@@ -4,6 +4,7 @@ import { Category, CategoryItems, MenuItem } from '../Models/Category';
 import { OrderItem } from '../Models/Order';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
+import { LocalStorageService } from '../service/LocalStorage/localstorage.service';
 
 @Component({
   selector: 'app-category',
@@ -16,7 +17,8 @@ export class CategoryComponent implements OnInit {
   orderItems: OrderItem[] = [];
   constructor(
     private categoryService: CategoryMenuService,
-    private orderDataService: OrderDataService
+    private orderDataService: OrderDataService,
+    private storageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -28,9 +30,15 @@ export class CategoryComponent implements OnInit {
       this.categories = item;
     });
 
-    this.orderDataService.orderItems$.subscribe((order) => {
-      this.orderItems = order;
-    });
+    var orderDetails = this.storageService.getObject('OrderDetails');
+    if (orderDetails == null) {
+      this.orderDataService.orderItems$.subscribe((order) => {
+        this.orderItems = order;
+      });
+    } else {
+      this.orderItems = orderDetails['OrderItems'];
+      this.updateOrderItems();
+    }
 
     if (this.selectedCategory === undefined || this.categories.length === 0) {
       if (this.categoryService.getCategories().length === 0) {

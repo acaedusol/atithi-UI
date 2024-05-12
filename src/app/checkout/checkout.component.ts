@@ -33,13 +33,25 @@ export class CheckoutComponent {
     } else {
       this.roomId = roomNumber;
     }
-    this.orderDataService.orderItems$.subscribe((order) => {
-      this.orderItems = order;
+
+    var orderDetails = this.storageService.getObject('OrderDetails');
+    if (orderDetails == null) {
+      this.orderDataService.orderItems$.subscribe((order) => {
+        this.orderItems = order;
+        this.cartCount = this.orderItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+      });
+    } else {
+      this.orderItems = orderDetails['OrderItems'];
       this.cartCount = this.orderItems.reduce(
         (total, item) => total + item.quantity,
         0
       );
-    });
+      this.updateOrderItems();
+    }
+
     this.categoryService.menuItem$.subscribe((item) => {
       this.menuItems = item;
     });

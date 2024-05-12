@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { OrderItem } from '../Models/Order';
+import { LocalStorageService } from '../service/LocalStorage/localstorage.service';
 
 @Component({
   selector: 'app-item-header',
@@ -17,17 +18,32 @@ export class ItemHeaderComponent {
   constructor(
     private location: Location,
     private router: Router,
-    private orderDataService: OrderDataService
+    private orderDataService: OrderDataService,
+    private storageService: LocalStorageService
   ) {}
 
   ngOnInit() {
-    this.orderDataService.orderItems$.subscribe((order) => {
-      this.orderItems = order;
+    var orderDetails = this.storageService.getObject('OrderDetails');
+    if (orderDetails?.length == 0) {
+      this.orderDataService.orderItems$.subscribe((order) => {
+        this.orderItems = order;
+        this.cartCount = this.orderItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+      });
+    } else {
+      this.orderItems = orderDetails['OrderItems'];
       this.cartCount = this.orderItems.reduce(
         (total, item) => total + item.quantity,
         0
-      ); // Update cart count
-    });
+      );
+      this.updateOrderItems();
+    }
+  }
+
+  updateOrderItems(): void {
+    this.orderDataService.setOrderItems(this.orderItems);
   }
 
   backButtonClicked() {
