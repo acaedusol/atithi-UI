@@ -19,6 +19,7 @@ export class CheckoutComponent {
   gst: number = 0;
   totalItemPrice: number = 0;
   roomId: string | null = '';
+  isLoading: boolean = false;
   constructor(
     private orderDataService: OrderDataService,
     private categoryService: CategoryMenuService,
@@ -28,7 +29,6 @@ export class CheckoutComponent {
 
   ngOnInit(): void {
     var roomNumber = this.storageService.getItem('RoomId');
-    console.log(roomNumber);
     if (roomNumber === null) {
       this.router.navigate(['/home']);
     } else {
@@ -170,6 +170,18 @@ export class CheckoutComponent {
   }
 
   navigateToConfirmPage() {
-    this.router.navigate(['/confirm']);
+    this.isLoading = true;
+
+    this.orderDataService.placeOrder(Number(this.roomId)).subscribe(
+      (data) => {
+        this.router.navigate(['/confirm']);
+      },
+      (error) => {
+        console.error('Error occurred while placing order:', error);
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 }

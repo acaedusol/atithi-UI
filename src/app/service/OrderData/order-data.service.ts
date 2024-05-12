@@ -1,13 +1,17 @@
 // src/app/services/order-data.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { OrderItem } from '../../Models/Order';
 import { LocalStorageService } from '../LocalStorage/localstorage.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environment';
 
 @Injectable({
   providedIn: 'root', // Available globally
 })
 export class OrderDataService {
+  constructor(private http: HttpClient) {}
+
   private storageService = new LocalStorageService();
   // Use a BehaviorSubject to hold the orderItems data
   private orderItemsSubject = new BehaviorSubject<OrderItem[]>([]);
@@ -44,11 +48,30 @@ export class OrderDataService {
 
   setOrderPlacement(isOrderPlaced: boolean) {
     localStorage.removeItem('OrderDetails');
+    localStorage.setItem('PlaceOrder', 'true');
     this.isOrderPlacedSubject.next(isOrderPlaced);
     this.orderItemsSubject.next([]);
   }
 
   setRoomId(roomId: number) {
     this.roomIdSubject.next(roomId);
+  }
+
+  placeOrder(roomId: number): Observable<string> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      accept: '*/*',
+    });
+
+    const requestBody = {
+      roomId: roomId,
+      orderItems: this.getOrderItems(),
+    };
+
+    return this.http.post<string>(
+      environment.apiUrl + 'order/placeOrder',
+      requestBody,
+      { headers }
+    );
   }
 }
