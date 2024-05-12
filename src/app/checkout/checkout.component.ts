@@ -4,6 +4,7 @@ import { OrderItem } from '../Models/Order';
 import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
 import { MenuItem } from '../Models/Category';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../service/LocalStorage/localstorage.service';
 
 @Component({
   selector: 'app-checkout',
@@ -17,13 +18,21 @@ export class CheckoutComponent {
   totalPrice: number = 0;
   gst: number = 0;
   totalItemPrice: number = 0;
+  roomId: string | null = '';
   constructor(
     private orderDataService: OrderDataService,
     private categoryService: CategoryMenuService,
-    private router: Router
+    private router: Router,
+    private storageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    var roomNumber = this.storageService.getItem('RoomId');
+    if (roomNumber === null) {
+      this.router.navigate(['/home']);
+    } else {
+      this.roomId = roomNumber;
+    }
     this.orderDataService.orderItems$.subscribe((order) => {
       this.orderItems = order;
       this.cartCount = this.orderItems.reduce(

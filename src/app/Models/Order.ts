@@ -7,3 +7,8 @@ export interface Order {
   roomId: number; // Room identifier
   orderItems: OrderItem[]; // List of order items
 }
+
+export interface StorageObject {
+  data: Object;
+  expiryTime: number;
+}

@@ -19,27 +19,26 @@ export class AppComponent {
         window.scrollTo(0, 0); // Reset scroll position on navigation end
       }
       if (event instanceof NavigationEnd) {
-        // List of routes where the header should be hidden
-        const routesWithHeader = ['/home'];
-        this.showHeader = routesWithHeader.includes(this.router.url);
-        const routesWithFooter = ['/home', '/item-list'];
-        this.showFooter = routesWithFooter.includes(this.router.url);
+        this.showHeader = false;
         this.showCart = false;
-        const urlParts = this.router.url.split('/');
-        const lastIndex = urlParts[urlParts.length - 1];
-        switch (lastIndex) {
-          case 'item-list':
-            this.componentName = 'Item List';
-            this.showCart = true;
-            break;
-          case 'empty':
-            this.componentName = 'Cart';
-            break;
-          case 'checkout':
-            this.componentName = 'Checkout';
-            break;
-          default:
-            this.componentName = 'Order Confirmation';
+        this.componentName = '';
+        var location = this.router.url.split('/')[1];
+
+        // List of routes where the header should be hidden
+        const routesWithHeader = ['home'];
+        this.showHeader = routesWithHeader.includes(location);
+        const routesWithFooter = ['home', 'item-list'];
+        this.showFooter = routesWithFooter.includes(location);
+
+        if (['item-list'].includes(location)) {
+          this.componentName = 'Item List';
+          this.showCart = true;
+        } else if (['empty'].includes(location)) {
+          this.componentName = 'Cart';
+        } else if (['checkout'].includes(location)) {
+          this.componentName = 'Checkout';
+        } else if (['confirm'].includes(location)) {
+          this.componentName = 'Order Confirmation';
         }
       }
     });

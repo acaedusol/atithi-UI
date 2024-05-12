@@ -4,7 +4,8 @@ import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.servic
 import { Category, CategoryItems, MenuItem } from '../Models/Category';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { OrderItem } from '../Models/Order';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LocalStorageService } from '../service/LocalStorage/localstorage.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,13 +16,18 @@ export class HomeComponent {
   selectedCategory: Category | undefined;
   orderItems: OrderItem[] = [];
   isOrderPlaced: boolean = false;
+  roomId: string | null = '';
   constructor(
     private categoryService: CategoryMenuService,
     private orderDataService: OrderDataService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private storageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    this.setRoomNumberInLocalStorage();
+
     if (this.categoryService.getCategories().length === 0) {
       this.categoryService.getAllCategoryMenu().subscribe((data) => {
         this.categoryService.setCategories(data);
@@ -39,6 +45,21 @@ export class HomeComponent {
     this.orderDataService.isOrderPlaced$.subscribe((source) => {
       this.isOrderPlaced = source;
     });
+  }
+
+  private setRoomNumberInLocalStorage() {
+    var roomNumber = this.storageService.getItem('RoomId');
+    var params = this.activatedRoute.snapshot.paramMap.get('roomId');
+    if (params != null && params != roomNumber) {
+      roomNumber = null;
+    }
+    if (roomNumber === null) {
+      this.roomId = params; // when param is null, open a popup to getdetails
+      this.storageService.setItem('RoomId', this.roomId);
+    } else {
+      this.roomId = roomNumber;
+      this.router.navigate(['/home/' + this.roomId]);
+    }
   }
 
   // Set the selected category

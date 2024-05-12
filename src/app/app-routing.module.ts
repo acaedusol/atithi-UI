@@ -4,13 +4,16 @@ import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'category', component: CategoryComponent },
+  { path: 'home/:roomId', component: HomeComponent },
+  { path: 'item-list', component: CategoryComponent },
+  { path: 'confirm', component: OrderConfirmationComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'order-confirmation', component: OrderConfirmationComponent },
+  { path: 'empty', component: EmptyCartComponent },
 ];
 
 @NgModule({
