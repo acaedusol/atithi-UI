@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, SimpleChanges } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
 import { Category, CategoryItems, MenuItem } from '../Models/Category';
@@ -20,12 +20,16 @@ export class HomeComponent {
   roomId: string | null = '';
   orderId: string = '';
   roomErrorText: boolean = false;
+  eventSource: EventSource | null = null; // Declare eventSource outside of the function scope
+  timer: any;
+
   constructor(
     private categoryService: CategoryMenuService,
     private orderDataService: OrderDataService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +69,17 @@ export class HomeComponent {
     });
 
     this.setOrderStatus();
+
+    this.timer = setInterval(() => {
+      this.setOrderStatus();
+    }, 5 * 60 * 1000); // Check every 5 seconds (adjust as needed)
+  }
+
+  ngOnDestroy(): void {
+    // Clear the timer when the component is destroyed
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   private setRoomNumberInLocalStorage() {
@@ -182,12 +197,15 @@ export class HomeComponent {
 
   setOrderStatus() {
     if (this.orderId != '') {
+      if (this.eventSource) {
+        this.eventSource.close();
+      }
       // Create EventSource connection
-      const eventSource = new EventSource(
+      this.eventSource = new EventSource(
         `https://atithiweb20240510221117.azurewebsites.net/send/${this.orderId}/${this.roomId}`
       );
 
-      eventSource.onmessage = (event) => {
+      this.eventSource.onmessage = (event) => {
         const item = JSON.parse(event.data);
         if (item != null && item != 'data: ' && item != 'data: null') {
           this.orderDataService.setOrderPlacement(false);
@@ -195,6 +213,7 @@ export class HomeComponent {
           this.isOrderPlaced = false;
           this.orderId = '';
           this.orderDataService.setOrderId('');
+          this.cd.detectChanges();
         } else {
           this.orderDataService.setOrderPlacement(true);
         }

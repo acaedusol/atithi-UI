@@ -75,10 +75,12 @@ export class OrderDataService {
   }
 
   setOrderId(orderId: string) {
-    localStorage.setItem(
-      'OrderId+RoomId',
-      JSON.stringify({ OrderId: orderId, RoomId: this.roomIdSubject.value })
-    );
+    if (orderId != '') {
+      localStorage.setItem(
+        'OrderId+RoomId',
+        JSON.stringify({ OrderId: orderId, RoomId: this.roomIdSubject.value })
+      );
+    }
     this.orderIdSubject.next(orderId);
   }
 }
