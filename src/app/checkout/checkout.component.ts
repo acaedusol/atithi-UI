@@ -29,6 +29,7 @@ export class CheckoutComponent {
 
   ngOnInit(): void {
     var roomNumber = this.storageService.getItem('RoomId');
+    console.log(roomNumber);
     if (roomNumber === null) {
       this.router.navigate(['/home']);
     } else {
@@ -174,6 +175,9 @@ export class CheckoutComponent {
 
     this.orderDataService.placeOrder(Number(this.roomId)).subscribe(
       (data) => {
+        this.orderDataService.setOrderId(data);
+        this.orderDataService.setOrderPlacement(true);
+    
         this.router.navigate(['/confirm']);
       },
       (error) => {

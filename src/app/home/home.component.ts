@@ -6,6 +6,7 @@ import { OrderDataService } from '../service/OrderData/order-data.service';
 import { OrderItem } from '../Models/Order';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from '../service/LocalStorage/localstorage.service';
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,6 +18,8 @@ export class HomeComponent {
   orderItems: OrderItem[] = [];
   isOrderPlaced: boolean = false;
   roomId: string | null = '';
+  orderId: string = '';
+  roomErrorText: boolean = false;
   constructor(
     private categoryService: CategoryMenuService,
     private orderDataService: OrderDataService,
@@ -46,8 +49,22 @@ export class HomeComponent {
     }
     this.updateOrderItems();
     this.orderDataService.isOrderPlaced$.subscribe((source) => {
-      this.isOrderPlaced = source;
+      var order = localStorage.getItem('OrderId+RoomId');
+      if (order != null) {
+        this.isOrderPlaced = true;
+        var parsedData = JSON.parse(order);
+        this.orderId = parsedData.OrderId;
+        var roomIdfromStorage = parsedData.RoomId;
+        if (this.roomId != roomIdfromStorage) {
+          localStorage.clear();
+          localStorage.setItem('OrderId+RoomId', order);
+        }
+      } else {
+        this.isOrderPlaced = source;
+      }
     });
+
+    this.setOrderStatus();
   }
 
   private setRoomNumberInLocalStorage() {
@@ -161,5 +178,25 @@ export class HomeComponent {
     event.preventDefault(); // Prevents default scrolling behavior
     const container = event.currentTarget as HTMLElement;
     container.scrollLeft += event.deltaY; // Adjust scrolling speed as needed
+  }
+
+  setOrderStatus() {
+    if (this.orderId != '') {
+      // Create EventSource connection
+      const eventSource = new EventSource(
+        `https://atithiweb20240510221117.azurewebsites.net/send/${this.orderId}/${this.roomId}`
+      );
+
+      eventSource.onmessage = (event) => {
+        const item = JSON.parse(event.data);
+        if (item != null && item != 'data: ' && item != 'data: null') {
+          this.orderDataService.setOrderPlacement(false);
+          localStorage.removeItem('OrderId+RoomId');
+          this.isOrderPlaced = false;
+        } else {
+          this.orderDataService.setOrderPlacement(true);
+        }
+      };
+    }
   }
 }

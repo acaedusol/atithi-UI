@@ -4,6 +4,7 @@ import { MenuItem } from '../Models/Category';
 import { OrderDataService } from '../service/OrderData/order-data.service';
 import { CategoryMenuService } from '../service/CategoryMenu/categorymenu.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../service/LocalStorage/localstorage.service';
 
 @Component({
   selector: 'app-order-confirmation',
@@ -17,13 +18,22 @@ export class OrderConfirmationComponent {
   totalPrice: number = 0;
   gst: number = 0;
   totalItemPrice: number = 0;
+  roomId: number = 0;
   constructor(
     private orderDataService: OrderDataService,
     private categoryService: CategoryMenuService,
-    private router: Router
+    private router: Router,
+    private storageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    var roomNumber = this.storageService.getItem('RoomId');
+    if (roomNumber === null) {
+      this.router.navigate(['/home']);
+    } else {
+      this.roomId = roomNumber;
+    }
+
     this.orderDataService.orderItems$.subscribe((order) => {
       this.orderItems = order;
       this.cartCount = this.orderItems.reduce(
@@ -37,7 +47,7 @@ export class OrderConfirmationComponent {
 
     if (this.orderItems.length === 0) {
       this.orderDataService.setOrderPlacement(false);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/' + this.roomId]);
     }
 
     this.totalPrice = this.fetchOrderDetails();
@@ -83,7 +93,8 @@ export class OrderConfirmationComponent {
   }
 
   navigateToHomePage() {
-    this.orderDataService.setOrderPlacement(true);
-    this.router.navigate(['/home']);
+    localStorage.removeItem('OrderDetails');
+    this.orderDataService.setOrderItems([]);
+    this.router.navigate(['/home/' + this.roomId]);
   }
 }

@@ -11,7 +11,10 @@ export class LocalStorageService {
       expiryTime: Date.now() + maxAge,
     };
     if (key === 'RoomId') {
+      var orderdetails = localStorage.getItem('OrderId+Room');
       localStorage.clear();
+      if (orderdetails != null)
+        localStorage.setItem('OrderId+Room', JSON.stringify(orderdetails));
     }
     localStorage.setItem(key, JSON.stringify(result));
   }
@@ -25,7 +28,10 @@ export class LocalStorageService {
 
     let result = JSON.parse(data);
     if (Date.now() > result.expiryTime) {
+      var value = localStorage.getItem('OrderId+Room');
       localStorage.clear();
+      if (value != null)
+        localStorage.setItem('OrderId+Room', JSON.stringify(value));
       return null;
     }
     return result.data;
@@ -48,7 +54,10 @@ export class LocalStorageService {
 
     let result = JSON.parse(data);
     if (result.expireTime <= Date.now()) {
+      var value = localStorage.getItem('OrderId+Room');
       localStorage.clear();
+      if (value != null)
+        localStorage.setItem('OrderId+Room', JSON.stringify(value));
       return [];
     }
     return result.data;

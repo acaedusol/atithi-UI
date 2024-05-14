@@ -17,8 +17,11 @@
       />
     </svg>
   </span>
-  <p class="tw-text-sm tw-font-medium tw-leading-[17px]">
+  <p *ngIf="roomId != null" class="tw-text-sm tw-font-medium tw-leading-[17px]">
     Room Number {{ roomId }}
+  </p>
+  <p *ngIf="roomId == null" class="tw-text-sm tw-font-medium tw-leading-[17px]">
+    Please add Room Number
   </p>
 </div>
 <div class="tw-min-h-[183px] tw-bg-[#05162E] tw-py-5 tw-pr-4 tw-pl-7">

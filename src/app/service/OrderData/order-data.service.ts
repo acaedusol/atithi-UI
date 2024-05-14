@@ -24,9 +24,11 @@ export class OrderDataService {
 
   // Use a BehaviorSubject to hold the orderItems data
   private isOrderPlacedSubject = new BehaviorSubject<boolean>(false);
-
   // Observable that components can subscribe to
   isOrderPlaced$ = this.isOrderPlacedSubject.asObservable();
+
+  private orderIdSubject = new BehaviorSubject<string>('');
+  orderId$ = this.orderIdSubject.asObservable();
 
   // Method to update the orderItems data
   setOrderItems(orderItems: OrderItem[]): void {
@@ -47,10 +49,7 @@ export class OrderDataService {
   }
 
   setOrderPlacement(isOrderPlaced: boolean) {
-    localStorage.removeItem('OrderDetails');
-    localStorage.setItem('PlaceOrder', 'true');
     this.isOrderPlacedSubject.next(isOrderPlaced);
-    this.orderItemsSubject.next([]);
   }
 
   setRoomId(roomId: number) {
@@ -73,5 +72,13 @@ export class OrderDataService {
       requestBody,
       { headers }
     );
+  }
+
+  setOrderId(orderId: string) {
+    localStorage.setItem(
+      'OrderId+RoomId',
+      JSON.stringify({ OrderId: orderId, RoomId: this.roomIdSubject.value })
+    );
+    this.orderIdSubject.next(orderId);
   }
 }
