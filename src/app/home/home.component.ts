@@ -58,6 +58,7 @@ export class HomeComponent {
         this.isOrderPlaced = true;
         var parsedData = JSON.parse(order);
         this.orderId = parsedData.OrderId;
+        this.orderDataService.setOrderId(this.orderId);
         var roomIdfromStorage = parsedData.RoomId;
         if (this.roomId != roomIdfromStorage) {
           localStorage.clear();
@@ -72,7 +73,7 @@ export class HomeComponent {
 
     this.timer = setInterval(() => {
       this.setOrderStatus();
-    }, 30 * 1000); // Check every 30 seconds (adjust as needed)
+    }, 20 * 1000); // Check every 30 seconds (adjust as needed)
   }
 
   ngOnDestroy(): void {
@@ -196,7 +197,8 @@ export class HomeComponent {
   }
 
   setOrderStatus() {
-    if (this.orderId != '') {
+    var order = localStorage.getItem('OrderId+RoomId');
+    if (this.orderId != '' && order != null) {
       if (this.eventSource) {
         this.eventSource.close();
       }
@@ -218,6 +220,10 @@ export class HomeComponent {
           this.orderDataService.setOrderPlacement(true);
         }
       };
+    } else {
+      if (this.eventSource) {
+        this.eventSource.close();
+      }
     }
   }
 }
