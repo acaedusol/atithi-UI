@@ -72,7 +72,7 @@ export class HomeComponent {
 
     this.timer = setInterval(() => {
       this.setOrderStatus();
-    }, 5 * 60 * 1000); // Check every 5 seconds (adjust as needed)
+    }, 30 * 1000); // Check every 30 seconds (adjust as needed)
   }
 
   ngOnDestroy(): void {
