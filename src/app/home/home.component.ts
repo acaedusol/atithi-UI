@@ -193,6 +193,8 @@ export class HomeComponent {
           this.orderDataService.setOrderPlacement(false);
           localStorage.removeItem('OrderId+RoomId');
           this.isOrderPlaced = false;
+          this.orderId = '';
+          this.orderDataService.setOrderId('');
         } else {
           this.orderDataService.setOrderPlacement(true);
         }
